@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<script src ="http://code.jquery.com/jquery-2.1.4.min.js" rel = "stylesheet"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel = "stylesheet">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	</head>
+
+	<style>
+		body{
+			background-color:#F1F2F4 !important;
+		}
+
+		textarea{
+			overflow:auto;
+			overflow:hidden;
+			width:100%;
+			outline: none;
+		}
+
+	</style>
+
+	<body>
+		<div class = "container">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-lg-4 col-md-4 col-sm-4">
+					<h1>text</h1>
+					<textarea id = "textInput" placeholder = "text" onkeydown ="setHeight(this);" onkeyup ="setHeight(this);" autofocus></textarea>
+				</div>
+				<div class = "col-lg-4 col-md-4 col-sm-4">
+					<h1>pics/files</h1>
+						<form action="demo_form.asp">
+						<input type="file" name="pic" accept="image/*">
+						<input type="submit">
+					</form>
+				</div>
+				<div class = "col-lg-4 col-md-4 col-sm-4">
+					<h1>links</h1>
+					<textarea id = "linksLinkInput" placeholder = "link address" onkeydown ="setHeight(this);" onkeyup ="setHeight(this);" autofocus></textarea>
+					<br>
+					<textarea id = "linksDescriptionInput" placeholder = "description" onkeydown ="setHeight(this);" onkeyup ="setHeight(this);" autofocus></textarea>
+				</div>
+			</row>
+		</div>
+
+
+		<script>
+			//resize text boxes
+			function setHeight(fieldId){
+				var sheight = fieldId.scrollHeight;
+				if(sheight > 44){
+					fieldId.style.height = fieldId.scrollHeight+'px';
+				}
+			}
+
+		//for handling enter key in boxes
+			document.getElementById("textInput").addEventListener("keyup",function(e){
+				setHeight(this)
+				if(e.keyCode == 13){
+					alert("textInput")
+				}
+			})
+
+			document.getElementById("linksLinkInput").addEventListener("keyup",function(e){
+				if(e.keyCode == 13){
+					document.getElementById("linksDescriptionInput").focus();
+				}
+			})
+
+			document.getElementById("linksDescriptionInput").addEventListener("keyup",function(e){
+				if(e.keyCode == 13){
+					alert("linksDescriptionInput")
+				}
+			})
+
+			//disable enterkey
+			$("textarea").keydown(function(e){
+				if(e.keyCode==13 && !e.shiftKey){
+					e.preventDefault();
+				}
+			})
+		
+		</script>
+	</body>
+
+</html>

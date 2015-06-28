@@ -1,0 +1,43 @@
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var mongoose = require("mongoose");
+
+function addPost(content,date){
+	//mongoose.
+}
+
+mongoose.connect("mongodb://localhost/aldinfeed");
+
+//models
+mongoose.model("posts",{content:String,date:Number});
+
+var posts = mongoose.model("posts");
+
+var npost = new posts();
+npost.content = "adf";
+npost.date = Date.now();
+
+npost.save();
+
+posts.find({},function(e,r){
+	console.log(r)
+})
+
+
+app.get('/', function(req, res){
+	res.sendfile("bs.html");
+});
+
+io.on('connection', function(socket){
+	  console.log('a user connected');
+
+	  socket.on("getData",function(data){
+	  	console.log("data");
+	  });
+});
+
+
+http.listen(3000, function(){
+	  console.log('listening on *:3000');
+});
